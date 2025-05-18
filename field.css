@@ -2,12 +2,12 @@
 
 @font-face {
     font-family: 'Sans';
-    src: url('../fonts/Sans.ttf') format('truetype');
+    src: url('Sans.ttf') format('truetype');
   }
   
   @font-face {
     font-family: 'Anton';
-    src: url('../fonts/Anton-Regular.ttf') format('truetype');
+    src: url('Anton-Regular.ttf') format('truetype');
   }
   
   body, html {
@@ -18,7 +18,7 @@
   }
   
   .home-container {
-    background-image: url('../images/home_bg.png');
+    background-image: url('home_bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

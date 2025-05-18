@@ -1,34 +1,34 @@
 @font-face {
     font-family: 'Horizon';
-    src: url('../fonts/horizon.otf') format('opentype');
+    src: url('horizon.otf') format('opentype');
 }
 
 @font-face {
     font-family: 'Fineday';
-    src: url('../fonts/Fineday-StyleTwonon-connect.ttf') format('truetype');
+    src: url('Fineday-StyleTwonon-connect.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Sans';
-    src: url('../fonts/Sans.ttf') format('truetype');
+    src: url('Sans.ttf') format('truetype');
 }
 
 
 @font-face {
     font-family: 'PlayfairDisplay';
-    src: url('../fonts/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+    src: url('PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Almarai-Bold';
-    src: url('../fonts/Almarai-Bold.ttf') format('truetype');
+    src: url('Almarai-Bold.ttf') format('truetype');
 }
 
 
 body {
     margin: 0;
     padding: 0;
-    background-image: url('../images/home_bg.png');
+    background-image: url('home_bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -81,7 +81,7 @@ body {
     box-sizing: border-box;
     font-family: 'Sans', sans-serif;
 
-    background: url('../images/folder_icon.png') no-repeat right 10px center;
+    background: url('folder_icon.png') no-repeat right 10px center;
     background-size: 18px 18px;
 }
 

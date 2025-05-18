@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             height: 100px;
                             border: 5px solid #17e3b2;
                             border-radius: 50%;
-                            background-image: url('images/profile_0${index + 1}.jpg');
+                            background-image: url('profile_0${index + 1}.jpg');
                             background-size: cover;
                             background-position: center;
                         "></div>
