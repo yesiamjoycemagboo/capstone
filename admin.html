@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instrumentor Home</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="../fonts/Sans.ttf" type="font/ttf">
+  <link rel="stylesheet" href="../fonts/Anton-Regular.ttf" type="font/ttf">
+</head>
+<body>
+    <div class="home-container">
+        <div class="center-container">
+            <button class="back-button" onclick="location.href='home.html'">
+              <img src="../images/back_white.png" alt="Back Icon" class="back-icon">
+              Back
+            </button>
+            <h1 class="data-title">Data Control</h1>
+            <div id="data-list" class="data-list"></div>
+
+          </div>          
+    </div>   
+
+    
+
+      <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore-compat.js"></script>
+
+
+  <!-- Your scripts -->
+  <script src="firebase-config.js"></script>
+  
+  <script>
+    const db = firebase.firestore();
+    const dataList = document.getElementById('data-list');
+  
+    db.collection("storedData").get().then((querySnapshot) => {
+      if (querySnapshot.empty) {
+        dataList.innerHTML = "<p style='font-family: Anton; font-size: 20px;'>No datasets found.</p>";
+        return;
+      }
+  
+      querySnapshot.forEach((doc) => {
+        const title = doc.id;
+  
+        const item = document.createElement('div');
+        item.className = 'data-item';
+  
+        const titleText = document.createElement('span');
+        titleText.textContent = title;
+  
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.onclick = () => {
+          if (confirm(`Are you sure you want to delete "${title}"?`)) {
+            db.collection("storedData").doc(title).delete().then(() => {
+              item.remove(); // Remove the item from the DOM
+              alert(`Deleted "${title}" successfully.`);
+            }).catch((error) => {
+              alert("Error deleting document: " + error);
+            });
+          }
+        };
+  
+        item.appendChild(titleText);
+        item.appendChild(deleteBtn);
+        dataList.appendChild(item);
+      });
+    }).catch((error) => {
+      console.error("Error fetching documents: ", error);
+    });
+  </script>
+
+  
+  </body>
+</html>
+

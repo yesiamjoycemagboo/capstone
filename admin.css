@@ -1,0 +1,114 @@
+/* styles.css */
+
+@font-face {
+    font-family: 'Sans';
+    src: url('../fonts/Sans.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Anton';
+    src: url('../fonts/Anton-Regular.ttf') format('truetype');
+  }
+  
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .home-container {
+    background-image: url('../images/home_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .center-container {
+    width: 90%;
+    height: 90%;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    position: relative;
+    padding: 20px;
+  }
+  
+  .back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #eb0303;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-family: 'Sans', sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+    z-index: 1000; /* Ensure it's on top */
+  }
+
+  .back-button:hover {
+    background-color: #b30202;
+  }
+  
+  .back-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
+  
+  .data-list {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+    max-height: 80%;
+  }
+  
+  .data-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid black;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .delete-btn {
+    background-color: #eb0303;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Anton', sans-serif;
+  }
+  
+  .delete-btn:hover {
+    background-color: #b30202;
+  }
+  
+  .data-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 50px;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    color: black;
+  }
+  

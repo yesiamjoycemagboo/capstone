@@ -1,0 +1,137 @@
+/* styles.css */
+
+@font-face {
+    font-family: 'Sans';
+    src: url('../fonts/Sans.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Anton';
+    src: url('../fonts/Anton-Regular.ttf') format('truetype');
+  }
+  
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .home-container {
+    background-image: url('../images/home_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .center-container {
+    width: 90%;
+    height: 90%;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    position: relative;
+    padding: 20px;
+  }
+  
+  .rectangles-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    height: calc(100% - 60px); /* Ensure button remains at bottom */
+  }
+  
+  .rectangle {
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    position: relative;
+  }
+  
+  .title {
+    font-family: 'Anton', sans-serif;
+    font-size: 32px;
+    color: black;
+    text-align: center;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .data-table {
+    width: 90%;
+    margin: 60px auto 0 auto;
+    border-collapse: separate;
+    border-spacing: 2px;
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    text-align: center;
+    table-layout: fixed;
+  }
+  
+  .data-table td {
+    padding: 6px 12px;
+    border-radius: 0;
+    width: 50%;
+    word-wrap: break-word;
+  }
+  
+  
+  .gradient {
+    background: linear-gradient(to right, #5b03eb, #00b0c2);
+    color: white;
+  }
+  
+  .light {
+    background-color: #cdd6ff;
+    color: black;
+  }
+  
+  .lighter {
+    background-color: #e3e8ff;
+    color: black;
+  }
+  
+  .back-button {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: #eb0303;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-family: 'Sans', sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+    z-index: 1000; /* Ensure it's on top */
+  }
+  
+  .back-button:hover {
+    background-color: #b30202;
+  }
+  
+  .back-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .dataset-title {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 50px;
+    color: black;
+  }

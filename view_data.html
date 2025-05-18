@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instrumentor Home</title>
+  <link rel="stylesheet" href="view_data.css">
+  <link rel="stylesheet" href="../fonts/Sans.ttf" type="font/ttf">
+  <link rel="stylesheet" href="../fonts/Anton-Regular.ttf" type="font/ttf">
+</head>
+<body>
+    <div class="home-container">
+      <div class="center-container">
+
+        <!-- Rectangles with Titles -->
+        <div class="rectangles-container">
+          <div class="rectangle" id="rect1">
+            <div class="title">TEMPERATURE</div>
+            <table class="data-table">
+                <tr>
+                  <td class="gradient">INSTRUMENTS/SENSORS</td>
+                  <td class="gradient">RANGE</td>
+                </tr>
+                <tr>
+                  <td class="light">THERMOCOUPLE TYPE J</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">THERMOCOUPLE TYPE K</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">RTD 2 WIRED</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">RTD 3 WIRED</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+              </table>
+          </div>
+
+          <div class="rectangle" id="rect2">
+            <div class="title">PRESSURE</div>
+            <table class="data-table">
+                <tr>
+                    <td class="gradient">INSTRUMENTS/SENSORS</td>
+                    <td class="gradient">RANGE</td>
+                </tr>
+                <tr>
+                  <td class="light">ORIFICE PLATE</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">FLOW NOZZLE</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">VENTURI TUBE</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">ACRYLIC TANK</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+              </table>
+          </div>
+
+          <div class="rectangle" id="rect3">
+            <div class="title">LEVEL</div>
+            <table class="data-table">
+                <tr>
+                    <td class="gradient">INSTRUMENTS/SENSORS</td>
+                    <td class="gradient">RANGE</td>
+                </tr>
+                <tr>
+                  <td class="light">CAPACITANCE SENSORS</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">BALL FLOAT LEVEL SWITCH</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">BALL FLOAT LEVEL SENSOR</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">SIGHT GLASS</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+              </table>
+          </div>
+
+          <div class="rectangle" id="rect4">
+            <div class="title">FLOW</div>
+            <table class="data-table">
+                <tr>
+                    <td class="gradient">INSTRUMENTS/SENSORS</td>
+                    <td class="gradient">RANGE</td>
+                </tr>
+                <tr>
+                  <td class="light">FLOW NOZZLE</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">ORIFICE PLATE</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">VENTURI TUBE</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">ROTAMETER</td>
+                  <td class="lighter">Loading...</td>
+                </tr>
+              </table>
+          </div>
+
+        </div>
+        <button class="back-button" onclick="location.href='../home.html'">
+            <img src="../images/back_white.png" alt="Back Icon" class="back-icon">
+            Back
+          </button>
+          
+      </div>
+      <div id="dataset-title" class="dataset-title">Loading...</div>
+
+    </div>   
+
+
+
+
+      <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore-compat.js"></script>
+
+
+  <!-- Your scripts -->
+  <script src="firebase-config.js"></script>
+
+  <script>
+    const db = firebase.firestore();
+  
+    window.addEventListener('DOMContentLoaded', async () => {
+      const datasetName = localStorage.getItem('searchKey'); // This is your document ID
+  
+      if (!datasetName) {
+        alert('No dataset name provided. Redirecting back.');
+        window.location.href = 'home.html';
+        return;
+      }
+  
+      try {
+        const docRef = db.collection("storedData").doc(datasetName);
+        const doc = await docRef.get();
+  
+        if (doc.exists) {
+          const data = doc.data();
+  
+          // -------- TEMPERATURE --------
+          const tempData = data.temperature || {};
+          const tempSensors = ["typeJ", "typeK", "rtd2", "rtd3"];
+          document.querySelectorAll('#rect1 .data-table tr:nth-child(n+2) td:last-child').forEach((td, index) => {
+            const key = tempSensors[index];
+            td.textContent = tempData[key] || "N/ANO";
+          });
+  
+          // -------- PRESSURE --------
+          const pressureData = data.pressure || {};
+          const pressureSensors = ["bourbon", "differential", "guage", "acrylic"];
+          document.querySelectorAll('#rect2 .data-table tr:nth-child(n+2) td:last-child').forEach((td, index) => {
+            const key = pressureSensors[index];
+            td.textContent = pressureData[key] || "N/ANO";
+          });
+  
+          // -------- LEVEL --------
+          const levelData = data.level || {};
+          const levelSensors = ["capacitance", "ballSwitch", "ballLevel", "sightGlass"];
+          document.querySelectorAll('#rect3 .data-table tr:nth-child(n+2) td:last-child').forEach((td, index) => {
+            const key = levelSensors[index];
+            td.textContent = levelData[key] || "N/ANO";
+          });
+  
+          // -------- FLOW --------
+          const flowData = data.flow || {};
+          const flowSensors = ["flowNozzle", "orificePlate", "venturiTube"];
+          document.querySelectorAll('#rect4 .data-table tr:nth-child(n+2) td:last-child').forEach((td, index) => {
+            const key = flowSensors[index];
+            td.textContent = flowData[key] || "N/ANO";
+          });
+  
+        } else {
+            alert('No data found for the given dataset. Redirecting to home.');
+            window.location.href = 'home.html';
+            return;
+        }
+
+  
+        // Optional: clear search key after use
+        localStorage.removeItem('searchKey');
+  
+      } catch (error) {
+        console.error("Error fetching Firestore data:", error);
+      }
+
+      const datasetTitle = document.getElementById('dataset-title');
+      datasetTitle.textContent = datasetName.toUpperCase(); // Or format as needed
+    });
+  </script>
+  
+  
+  </body>
+</html>
+

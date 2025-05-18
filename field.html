@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instrumentor Home</title>
+  <link rel="stylesheet" href="field.css">
+  <link rel="stylesheet" href="../fonts/Sans.ttf" type="font/ttf">
+  <link rel="stylesheet" href="../fonts/Anton-Regular.ttf" type="font/ttf">
+</head>
+<body>
+    <div class="home-container">
+      <div class="center-container">
+
+        <!-- Rectangles with Titles -->
+        <div class="rectangles-container">
+          <div class="rectangle" id="rect1">
+            <div class="title">TEMPERATURE</div>
+            <table class="data-table">
+                <tr>
+                  <td class="gradient">INSTRUMENTS/SENSORS</td>
+                  <td class="gradient">RANGE</td>
+                </tr>
+                <tr>
+                  <td class="light">THERMOCOUPLE TYPE J</td>
+                  <td class="lighter" id="typeJ-value">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">THERMOCOUPLE TYPE K</td>
+                  <td class="lighter" id="typeK-value">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">RTD 2 WIRED</td>
+                  <td class="lighter" id="rtd2-value">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">RTD 3 WIRED</td>
+                  <td class="lighter" id="rtd3-value">Loading...</td>
+                </tr>
+              </table>
+          </div>
+
+          <div class="rectangle" id="rect2">
+            <div class="title">PRESSURE</div>
+            <table class="data-table">
+                <tr>
+                    <td class="gradient">INSTRUMENTS/SENSORS</td>
+                    <td class="gradient">RANGE</td>
+                </tr>
+                <tr>
+                  <td class="light">ORIFICE PLATE</td>
+                  <td class="lighter" id="bourbon-value">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">VENTURI TUBE</td>
+                  <td class="lighter" id="differential-value">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">FLOW NOZZLE</td>
+                  <td class="lighter" id="guage-value">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">ACRYLIC TANK</td>
+                  <td class="lighter" id="acrylic-pressure">Loading...</td>
+                </tr>
+              </table>
+          </div>
+
+          <div class="rectangle" id="rect3">
+            <div class="title">LEVEL</div>
+            <table class="data-table">
+                <tr>
+                    <td class="gradient">INSTRUMENTS/SENSORS</td>
+                    <td class="gradient">RANGE</td>
+                </tr>
+                <tr>
+                  <td class="light">CAPACITANCE SENSORS</td>
+                  <td class="lighter" id="capacitance-value">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">BALL FLOAT LEVEL SWITCH</td>
+                  <td class="lighter" id="ball-switch-value">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">BALL FLOAT LEVEL SENSOR</td>
+                  <td class="lighter" id="ball-level-value">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">SIGHT GLASS</td>
+                  <td class="lighter" id="sight-value">Loading...</td>
+                </tr>
+              </table>
+          </div>
+
+          <div class="rectangle" id="rect4">
+            <div class="title">FLOW</div>
+            <table class="data-table">
+                <tr>
+                    <td class="gradient">INSTRUMENTS/SENSORS</td>
+                    <td class="gradient">RANGE</td>
+                </tr>
+                <tr>
+                  <td class="light">ORIFICE PLATE</td>
+                  <td class="lighter" id="orifice-value">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">FLOW NOZZLE</td>
+                  <td class="lighter" id="flow-nozzle-value">Loading...</td>
+                </tr>
+                <tr>
+                  <td class="light">VENTURI TUBE</td>
+                  <td class="lighter" id="venturi-value">Loading...</td>
+                </tr>
+              </table>
+          </div>
+
+        </div>
+        <button class="save-button">Save Data</button>
+        <button class="back-button" onclick="location.href='home.html'">
+            <img src="../images/back_white.png" alt="Back Icon" class="back-icon">
+            Back
+          </button>
+          
+      </div>
+    </div>
+
+    <div id="overlay" class="overlay hidden"></div>
+
+    <div id="popup" class="popup hidden">
+      <h2 class="popup-title">Data Storage Name:</h2>
+      <input type="text" class="popup-input" placeholder="Data Name">
+      <div class="popup-buttons">
+        <button class="popup-btn cancel">Cancel</button>
+        <button class="popup-btn confirm">Confirm</button>
+      </div>
+    </div>
+    
+
+
+      <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore-compat.js"></script>
+
+
+  <!-- Your scripts -->
+  <script src="firebase-config.js"></script>
+  <script src="field_data.js"></script>
+
+  <script>
+    const saveButton = document.querySelector('.save-button');
+    const popup = document.getElementById('popup');
+    const overlay = document.getElementById('overlay');
+    const closePopup = document.querySelector('.close-popup'); // optional if still present
+    const cancelButton = document.querySelector('.popup-btn.cancel');
+  
+    saveButton.addEventListener('click', () => {
+      popup.classList.remove('hidden');
+      overlay.classList.remove('hidden');
+    });
+  
+    const closePopupFunction = () => {
+      popup.classList.add('hidden');
+      overlay.classList.add('hidden');
+    };
+  
+    closePopup?.addEventListener('click', closePopupFunction); // optional if closePopup exists
+    cancelButton.addEventListener('click', closePopupFunction);
+
+    const confirmButton = document.querySelector('.popup-btn.confirm');
+const inputField = document.querySelector('.popup-input');
+
+confirmButton.addEventListener('click', () => {
+  const docName = inputField.value.trim();
+  if (!docName) {
+    alert("Please enter a name for the data.");
+    return;
+  }
+
+  const data = {
+    timestamp: new Date().toISOString(),
+    temperature: {
+      typeJ: document.getElementById('typeJ-value').textContent,
+      typeK: document.getElementById('typeK-value').textContent,
+      rtd2: document.getElementById('rtd2-value').textContent,
+      rtd3: document.getElementById('rtd3-value').textContent,
+    },
+    pressure: {
+      bourbon: document.getElementById('bourbon-value').textContent,
+      differential: document.getElementById('differential-value').textContent,
+      guage: document.getElementById('guage-value').textContent,
+      acrylic: document.getElementById('acrylic-pressure').textContent,
+    },
+    level: {
+      capacitance: document.getElementById('capacitance-value').textContent,
+      ballSwitch: document.getElementById('ball-switch-value').textContent,
+      ballLevel: document.getElementById('ball-level-value').textContent,
+      sightGlass: document.getElementById('sight-value').textContent,
+    },
+    flow: {
+      flowNozzle: document.getElementById('flow-nozzle-value').textContent,
+      orificePlate: document.getElementById('orifice-value').textContent,
+      venturiTube: document.getElementById('venturi-value').textContent,
+    }
+  };
+
+  firestore.collection("storedData").doc(docName).set(data)
+    .then(() => {
+      alert("Data saved successfully!");
+      popup.classList.add('hidden');
+      overlay.classList.add('hidden');
+    })
+    .catch((error) => {
+      console.error("Error saving data:", error);
+      alert("Failed to save data.");
+    });
+});
+
+  </script>
+  
+  
+  
+  </body>
+</html>
+
