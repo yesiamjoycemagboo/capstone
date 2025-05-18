@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <div class="white-rectangle">
+        <h1 class="title">InstruMentor:</h1>
+        <h2 class="subtitle">Educational Setup for BS ICE</h2>
+        <input type="text" class="search-box" placeholder="Data Storage">
+        <button class="access-button">ACCESS</button>
+    </div>
+
+    <div class="top-right-icons">
+        <button class="icon-button" id="infoBtn">
+            <img src="images/info_icon.png" alt="Info" />
+        </button>
+        <button class="icon-button" id="devBtn">
+            <img src="images/developer_icon.png" alt="Developer" />
+        </button>
+    </div>
+    
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-window" id="popupWindow">
+            <button class="close-btn" id="closePopup">&times;</button>
+            <!-- Content goes here -->
+            <h2 style="font-family: sans-serif; margin-top: 30px;">Popup Content</h2>
+            <p style="font-family: sans-serif;">This is the popup window for Info or Developer.</p>
+        </div>
+    </div>
+    
+    
+    <script src="home.js"></script>
+
+    <button class="bottom-right-btn" onclick="location.href='field.html'">
+        FIELD TRAINER
+        <img src="images/back_white_reverse.png" alt="icon" class="btn-icon" />
+    </button>
+    
+    
+</body>
+</html>
