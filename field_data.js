@@ -64,9 +64,6 @@ db.ref('sensordata/acrylic').on('value', (snapshot) => {
 
 //LEVEL
 const capacitanceBox = document.getElementById('capacitance-value');
-const ballSwitchBox = document.getElementById('ball-switch-value');
-const ballLevelBox = document.getElementById('ball-level-value');
-const sightBox = document.getElementById('sight-value');
 
 // Read Capacitance Sensor value
 db.ref('sensordata/capacitance').on('value', (snapshot) => {
@@ -74,24 +71,7 @@ db.ref('sensordata/capacitance').on('value', (snapshot) => {
     capacitanceBox.textContent = value !== null ? value : "N/A";
   });
   
-  // Read Ball Switch value
-  db.ref('sensordata/ballSwitch').on('value', (snapshot) => {
-    const value = snapshot.val();
-    ballSwitchBox.textContent = value !== null ? value : "N/A";
-  });
   
-  // Read Ball Level value
-  db.ref('sensordata/ballLevel').on('value', (snapshot) => {
-    const value = snapshot.val();
-    ballLevelBox.textContent = value !== null ? value : "N/A";
-  });
-  
-  // Read Sight Glass value
-  db.ref('sensordata/sightGlass').on('value', (snapshot) => {
-    const value = snapshot.val();
-    sightBox.textContent = value !== null ? value : "N/A";
-  });
-
 
 //FLOW
 const flowBox = document.getElementById('flow-nozzle-value');
