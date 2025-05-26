@@ -137,3 +137,28 @@ document.querySelector('.access-button').addEventListener('click', () => {
         window.location.href = 'view_data.html';
     }
 });
+
+function handleAccess() {
+    const searchValue = document.querySelector('.search-box').value.trim();
+    
+    if (searchValue === "") {
+        alert("Please enter a name before proceeding.");
+        return;
+    }
+
+    if (searchValue.toLowerCase() === "admin") {
+        window.location.href = "admin.html";
+    } else {
+        localStorage.setItem('searchKey', searchValue);
+        window.location.href = 'view_data.html';
+    }
+}
+
+
+document.querySelector('.access-button').addEventListener('click', handleAccess);
+
+document.querySelector('.search-box').addEventListener('keydown', (event) => {
+    if (event.key === "Enter") {
+        handleAccess();
+    }
+});

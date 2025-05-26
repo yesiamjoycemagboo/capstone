@@ -77,6 +77,10 @@
                   <td class="light">CAPACITANCE SENSOR</td>
                   <td class="lighter" id="capacitance-value">Loading...</td>
                 </tr>
+                <tr>
+                  <td class="light">RESERVOIR</td>
+                  <td class="lighter" id="reservoir-value">Loading...</td>
+                </tr>
               </table>
           </div>
 
@@ -122,6 +126,8 @@
         <button class="popup-btn confirm">Confirm</button>
       </div>
     </div>
+
+
     
 
 
@@ -145,7 +151,10 @@
     saveButton.addEventListener('click', () => {
       popup.classList.remove('hidden');
       overlay.classList.remove('hidden');
+      inputField.value = "";       // Always clear the field when opening
+      inputField.focus();          // Focus input field
     });
+
   
     const closePopupFunction = () => {
       popup.classList.add('hidden');
@@ -165,40 +174,62 @@ confirmButton.addEventListener('click', () => {
     return;
   }
 
-  const data = {
-    timestamp: new Date().toISOString(),
-    temperature: {
-      typeJ: document.getElementById('typeJ-value').textContent,
-      typeK: document.getElementById('typeK-value').textContent,
-      rtd2: document.getElementById('rtd2-value').textContent,
-      rtd3: document.getElementById('rtd3-value').textContent,
-    },
-    pressure: {
-      bourbon: document.getElementById('bourbon-value').textContent,
-      differential: document.getElementById('differential-value').textContent,
-      guage: document.getElementById('guage-value').textContent,
-      acrylic: document.getElementById('acrylic-pressure').textContent,
-    },
-    level: {
-      capacitance: document.getElementById('capacitance-value').textContent,
-    },
-    flow: {
-      flowNozzle: document.getElementById('flow-nozzle-value').textContent,
-      orificePlate: document.getElementById('orifice-value').textContent,
-      venturiTube: document.getElementById('venturi-value').textContent,
-    }
-  };
+  // Check if document with same name already exists
+  firestore.collection("storedData").doc(docName).get()
+    .then((docSnapshot) => {
+      if (docSnapshot.exists) {
+        alert("A data entry with that name already exists. Please choose a new name.");
+        inputField.value = ""; // Clear the textbox
+      } else {
+        const data = {
+          timestamp: new Date().toISOString(),
+          temperature: {
+            typeJ: document.getElementById('typeJ-value').textContent,
+            typeK: document.getElementById('typeK-value').textContent,
+            rtd2: document.getElementById('rtd2-value').textContent,
+            rtd3: document.getElementById('rtd3-value').textContent,
+          },
+          pressure: {
+            bourbon: document.getElementById('bourbon-value').textContent,
+            differential: document.getElementById('differential-value').textContent,
+            guage: document.getElementById('guage-value').textContent,
+            acrylic: document.getElementById('acrylic-pressure').textContent,
+          },
+          level: {
+            capacitance: document.getElementById('capacitance-value').textContent,
+            reservoir: document.getElementById('reservoir-value').textContent,
+          },
+          flow: {
+            flowNozzle: document.getElementById('flow-nozzle-value').textContent,
+            orificePlate: document.getElementById('orifice-value').textContent,
+            venturiTube: document.getElementById('venturi-value').textContent,
+          }
+        };
 
-  firestore.collection("storedData").doc(docName).set(data)
-    .then(() => {
-      alert("Data saved successfully!");
-      popup.classList.add('hidden');
-      overlay.classList.add('hidden');
+        firestore.collection("storedData").doc(docName).set(data)
+          .then(() => {
+            alert("Data saved successfully!");
+            popup.classList.add('hidden');
+            overlay.classList.add('hidden');
+            inputField.value = ""; // Also clear it after successful save (optional)
+          })
+          .catch((error) => {
+            console.error("Error saving data:", error);
+            alert("Failed to save data.");
+          });
+      }
     })
     .catch((error) => {
-      console.error("Error saving data:", error);
-      alert("Failed to save data.");
+      console.error("Error checking document existence:", error);
+      alert("Something went wrong while checking the data name.");
     });
+});
+
+// Allow pressing Enter to trigger the confirm button
+inputField.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+    confirmButton.click();
+  }
 });
 
   </script>

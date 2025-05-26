@@ -19,7 +19,7 @@
             <table class="data-table">
                 <tr>
                   <td class="gradient">INSTRUMENTS/SENSORS</td>
-                  <td class="gradient">RANGE</td>
+                  <td class="gradient">CELSIUS</td>
                 </tr>
                 <tr>
                   <td class="light">THERMOCOUPLE TYPE J</td>
@@ -45,7 +45,7 @@
             <table class="data-table">
                 <tr>
                     <td class="gradient">INSTRUMENTS/SENSORS</td>
-                    <td class="gradient">RANGE</td>
+                    <td class="gradient">PSI</td>
                 </tr>
                 <tr>
                   <td class="light">ORIFICE PLATE</td>
@@ -71,22 +71,14 @@
             <table class="data-table">
                 <tr>
                     <td class="gradient">INSTRUMENTS/SENSORS</td>
-                    <td class="gradient">RANGE</td>
+                    <td class="gradient">PERCENTAGE</td>
                 </tr>
                 <tr>
                   <td class="light">CAPACITANCE SENSORS</td>
                   <td class="lighter">Loading...</td>
                 </tr>
                 <tr>
-                  <td class="light">BALL FLOAT LEVEL SWITCH</td>
-                  <td class="lighter">Loading...</td>
-                </tr>
-                <tr>
-                  <td class="light">BALL FLOAT LEVEL SENSOR</td>
-                  <td class="lighter">Loading...</td>
-                </tr>
-                <tr>
-                  <td class="light">SIGHT GLASS</td>
+                  <td class="light">RESERVOIR</td>
                   <td class="lighter">Loading...</td>
                 </tr>
               </table>
@@ -97,22 +89,18 @@
             <table class="data-table">
                 <tr>
                     <td class="gradient">INSTRUMENTS/SENSORS</td>
-                    <td class="gradient">RANGE</td>
-                </tr>
-                <tr>
-                  <td class="light">FLOW NOZZLE</td>
-                  <td class="lighter">Loading...</td>
+                    <td class="gradient">L/MIN</td>
                 </tr>
                 <tr>
                   <td class="light">ORIFICE PLATE</td>
                   <td class="lighter">Loading...</td>
                 </tr>
                 <tr>
-                  <td class="light">VENTURI TUBE</td>
+                  <td class="light">FLOW NOZZLE</td>
                   <td class="lighter">Loading...</td>
                 </tr>
                 <tr>
-                  <td class="light">ROTAMETER</td>
+                  <td class="light">VENTURI TUBE</td>
                   <td class="lighter">Loading...</td>
                 </tr>
               </table>
@@ -178,7 +166,7 @@
   
           // -------- LEVEL --------
           const levelData = data.level || {};
-          const levelSensors = ["capacitance", "ballSwitch", "ballLevel", "sightGlass"];
+          const levelSensors = ["capacitance", "reservoir"];
           document.querySelectorAll('#rect3 .data-table tr:nth-child(n+2) td:last-child').forEach((td, index) => {
             const key = levelSensors[index];
             td.textContent = levelData[key] || "N/ANO";
@@ -186,7 +174,7 @@
   
           // -------- FLOW --------
           const flowData = data.flow || {};
-          const flowSensors = ["flowNozzle", "orificePlate", "venturiTube"];
+          const flowSensors = ["orificePlate", "flowNozzle", "venturiTube"];
           document.querySelectorAll('#rect4 .data-table tr:nth-child(n+2) td:last-child').forEach((td, index) => {
             const key = flowSensors[index];
             td.textContent = flowData[key] || "N/ANO";

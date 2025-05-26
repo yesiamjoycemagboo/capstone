@@ -36,6 +36,9 @@
     border-radius: 15px;
     position: relative;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Ensure children like data-list do not overflow */
   }
   
   .back-button {
@@ -68,12 +71,12 @@
   }
   
   .data-list {
-    margin-top: 80px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 15px;
     overflow-y: auto;
-    max-height: 80%;
+    flex-grow: 1;
   }
   
   .data-item {
@@ -112,3 +115,14 @@
     color: black;
   }
   
+  .center-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevent children from overflowing */
+}
+
+.data-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: unset;
+}

@@ -38,25 +38,25 @@ const guageBox = document.getElementById('guage-value');
 const acrylicBox = document.getElementById('acrylic-pressure');
 
 // Read Bourbon value
-db.ref('sensordata/bourbon').on('value', (snapshot) => {
+db.ref('sensordata/orifice_psi').on('value', (snapshot) => {
   const value = snapshot.val();
   bourbonBox.textContent = value !== null ? value : "N/A";
 });
 
 // Read Differential value
-db.ref('sensordata/differential').on('value', (snapshot) => {
+db.ref('sensordata/venturi_psi').on('value', (snapshot) => {
     const value = snapshot.val();
     differentialBox.textContent = value !== null ? value : "N/A";
   });
 
   // Read Guage value
-db.ref('sensordata/guage').on('value', (snapshot) => {
+db.ref('sensordata/nozzle_psi').on('value', (snapshot) => {
     const value = snapshot.val();
     guageBox.textContent = value !== null ? value : "N/A";
   });
 
     // Acrylic Tank
-db.ref('sensordata/acrylic').on('value', (snapshot) => {
+db.ref('sensordata/acrylic_psi').on('value', (snapshot) => {
     const value = snapshot.val();
     acrylicBox.textContent = value !== null ? value : "N/A";
   });
@@ -64,13 +64,19 @@ db.ref('sensordata/acrylic').on('value', (snapshot) => {
 
 //LEVEL
 const capacitanceBox = document.getElementById('capacitance-value');
+const reservoirBox = document.getElementById('reservoir-value');
 
 // Read Capacitance Sensor value
 db.ref('sensordata/capacitance').on('value', (snapshot) => {
     const value = snapshot.val();
     capacitanceBox.textContent = value !== null ? value : "N/A";
   });
-  
+
+// Read Reservoir Sensor value
+db.ref('sensordata/reservoir_level').on('value', (snapshot) => {
+    const value = snapshot.val();
+    reservoirBox.textContent = value !== null ? value : "N/A";
+  });
   
 
 //FLOW
@@ -79,19 +85,19 @@ const orificeBox = document.getElementById('orifice-value');
 const venturiBox = document.getElementById('venturi-value');
 
 // Read Flow Nozzle value
-db.ref('sensordata/flowNozzle').on('value', (snapshot) => {
+db.ref('sensordata/nozzle_flow').on('value', (snapshot) => {
   const value = snapshot.val();
   flowBox.textContent = value !== null ? value : "N/A";
 });
 
 // Read Orifice Plate value
-db.ref('sensordata/orificePlate').on('value', (snapshot) => {
+db.ref('sensordata/orifice_flow').on('value', (snapshot) => {
   const value = snapshot.val();
   orificeBox.textContent = value !== null ? value : "N/A";
 });
 
 // Read Venturi Tube value
-db.ref('sensordata/venturiTube').on('value', (snapshot) => {
+db.ref('sensordata/venturi_flow').on('value', (snapshot) => {
   const value = snapshot.val();
   venturiBox.textContent = value !== null ? value : "N/A";
 });
